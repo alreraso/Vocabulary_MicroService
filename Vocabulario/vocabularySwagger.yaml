@@ -1,0 +1,375 @@
+swagger: "2.0"
+info:
+  description: "Esta es una descripción de las URL del micro servicio Vocabulario del proyecto dentro de la materia Arquitectura de software, desarrollado por los estudiantes: miembros del grupo 1B"
+  version: "1.0.0"
+  title: "Proyecto Grupo 1B"
+  contact:
+    email: "mcarbonells@unal.edu.co"
+host: "localhost"
+tags:
+- name: "category"
+  description: "Categorias de vocabulario"
+  externalDocs:
+    description: "POSTMAN"
+    url: "https://documenter.getpostman.com/view/11064420/TVRrVjbe"
+- name: "words"
+  description: "Palabras de vocabulario"
+  externalDocs:
+    description: "POSTMAN"
+    url: "https://documenter.getpostman.com/view/11064420/TVRrVjbe"
+    
+schemes:
+- "http"
+
+paths:
+  /category/newCategory:
+    post:
+      tags:
+      - "category"
+      summary: "Añadir una nueva categoria"
+      description: ""
+      operationId: "addCategory"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "categoria a añadir en la DB pidiendo name y level"
+        required: true
+        schema:
+          $ref: "#/definitions/category"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/category"
+              
+  /category/AllCategories:   
+    get:
+      tags:
+      - "category"
+      summary: "Obtener todas las categorias"
+      description: ""
+      operationId: "findAllC"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/category"
+        "204":
+          description: "unsuccessful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/category"
+  /category/category:
+      get:
+        tags:
+          - "category"
+        summary: "Encontrar una categoria por el nombre"
+        operationId: "fingByName"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Busacar en DB una categoria por su nombre"
+            required: true
+            schema:
+              $ref: "#/definitions/category"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/category"
+          "204":
+            description: "not found"
+  /category/levelCategory:
+      get:
+        tags:
+          - "category"
+        summary: "Encontrar una categoria por el nivel"
+        operationId: "fingByLevel"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Busacar en DB una categoria por su nivel"
+            required: true
+            schema:
+              $ref: "#/definitions/category"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/category"
+          "204":
+            description: "not found"            
+  /category/updateCategory:
+    put:
+      tags:
+      - "category"
+      summary: "Modificar una categoria ya guardada"
+      description: ""
+      operationId: "updateC"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "categoria que se actualiza en la DB con name"
+        required: true
+        schema:
+          $ref: "#/definitions/category"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/category"
+        "404":
+          description: "not found"
+  
+  /category/deleteCategory: 
+    delete:
+      tags:
+      - "category"
+      summary: "Eliminar categoria"
+      description: ""
+      operationId: "deleteCategory"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Categoria que se elimina en la DB con name"
+          required: true
+          schema:
+            $ref: "#/definitions/category"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/category"
+        "404":
+          description: "not found"
+          
+  /words/newWord:
+    post:
+      tags:
+        - "words"
+      summary: "Añadir una nueva palabra"
+      description: ""
+      operationId: "addWord"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "palabra que se añade a la DB pidiendo: name, category, meaning, linkW, image"
+          required: true
+          schema:
+            $ref: "#/definitions/words"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/words"
+
+  /words/AllWords:
+      get:
+        tags:
+          - "words"
+        summary: "Obtener todas las palabras"
+        description: ""
+        operationId: "findAllW"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/words"
+          "204":
+            description: "unsuccessful operation"
+            schema:
+              type: "object"
+              items:
+                $ref: "#/definitions/words"
+
+  /words/word:
+      get:
+        tags:
+          - "words"
+        summary: "Encontrar una palabra por el nombre"
+        operationId: "fingByNameW"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "Busacar en DB una palabra por el nombre"
+            required: true
+            schema:
+              $ref: "#/definitions/words"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/words"
+          "204":
+            description: "not found"
+            
+  /words/categoryWords:
+        get:
+          tags:
+            - "words"
+          summary: "Encontrar una palabra por la categoria"
+          operationId: "fingByCategory"
+          produces:
+            - "application/json"
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "Busacar en DB palabras por su categoria"
+              required: true
+              schema:
+                $ref: "#/definitions/words"
+          responses:
+            "200":
+              description: "successful operation"
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/definitions/words"
+            "204":
+              description: "not found"
+              
+  /words/deleteWords:
+      delete:
+        tags:
+          - "words"
+        summary: "Eliminar una palabra por el nombre"
+        description: ""
+        operationId: "deleteWord"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "palabra que se elimina en la DB segun su name"
+            required: true
+            schema:
+              $ref: "#/definitions/words"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "object"
+              items:
+                $ref: "#/definitions/words"
+          "404":
+            description: "not found"
+          
+  /words/updateWord:  
+    put:
+        tags:
+          - "words"
+        summary: "Actualizar una palabra segun su nombre"
+        description: ""
+        operationId: "updateW"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "body"
+            name: "body"
+            description: "palabra a modificar en la DBsegun el name"
+            required: true
+            schema:
+              $ref: "#/definitions/words"
+        responses:
+          "201":
+            description: "successful operation"
+            schema:
+              type: "object"
+              items:
+                $ref: "#/definitions/words"
+    
+definitions:
+  category:
+    type: "object"
+    required:
+    - "name"
+    - "level"
+    properties:
+      name:
+        type: "string"
+        example: "Animals"
+      level:
+        type: "string"
+        example: "A1"
+    xml:
+      name: "category"
+  words:
+    type: "object"
+    required:
+    - "name"
+    - "category"
+    - "image"
+    - "linkW"
+    - "meaning"
+    properties:
+      name:
+        type: "string"
+        example: "Cat"
+      category:
+        type: "string"
+        example: "Animals"
+      image:
+        type: "string"
+        example: "imagen"
+      linkW:
+        type: "string"
+        example: "link"
+      meaning:
+        type: "string"
+        example: "Gato"
+    xml:
+      name: "words"
+  

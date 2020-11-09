@@ -11,12 +11,13 @@ categoryCrt.addCategory = async (req, res)=> {
     return res.status(201).send(category);
 }
 categoryCrt.findByName = async (req, res) => {
-    const category = await findC(req);
-    if(category!=null) return res.status(200).send(category);
+    const name = req.params.name;
+    const category =  await Category.find({name: name})
+    if(category.length!== 0) return res.status(200).send(category);
     return res.status(204).json({message: "NO CATEGORY CREATED"});
 };
 categoryCrt.findByLevel = async (req, res) => {
-    const{level} = req.body
+    const level = req.params.level;
     const category =  await Category.find({level: level})
     if(category.length!== 0) return res.status(200).send(category);
     return res.status(204).json({message: "NO CATEGORY CREATED"});

@@ -14,13 +14,14 @@ wordsCrt.addWord = async (req, res)=> {
     return res.status(201).send(words);
 }
 wordsCrt.findByWord = async (req, res) => {
-    const words = await findW(req);
-    if(words.length!=null) return res.status(200).send(words);
+    const name = req.params.name;
+    const words =  await Words.find({name: name})
+    if(words.length!==0) return res.status(200).send(words);
     return res.status(204).json({message: "NO WORD CREATED"});
 };
 
 wordsCrt.findByCategory = async (req, res) => {
-    const{category} = req.body
+    const category = req.params.category;
     const words =  await Words.find({category: category})
     if(words.length!==0) return res.status(200).send(words);
     return res.status(204).json({message: "NO WORD CREATED"});

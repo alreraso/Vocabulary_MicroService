@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mongodb/vocabularyDB',{
+mongoose.connect('mongodb://54.163.16.166:27019/vocabularyDB',{
     userNewUrlParser: true,
     userCreateIndex: true
 });

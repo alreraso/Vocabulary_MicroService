@@ -5,6 +5,7 @@ mongoose.connect('mongodb://3.238.233.96:27019/vocabularyDB',{
     userCreateIndex: true
 });
 
+
 const connection= mongoose.connection;
 
 connection.once('open',() => {

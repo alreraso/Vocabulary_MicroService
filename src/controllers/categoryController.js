@@ -52,7 +52,7 @@ categoryCrt.deleteCategory = async (req, res) => {
 };
 
 findC= async (req) =>{
-    const{name} = req.body
+    const{name} = req.body;
     const category =  await Category.find({name: name})
     if(category.length!==0) return  category;
     else return null;

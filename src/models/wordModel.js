@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Words = new mongoose.Schema({
     name:{
         type: String,
+        unique: true,
         required: true
     },
     category: {type: String,
@@ -18,6 +19,7 @@ const Words = new mongoose.Schema({
     },
     meaning:{
         type: String,
+        unique: true,
         required: true
     }
 });
